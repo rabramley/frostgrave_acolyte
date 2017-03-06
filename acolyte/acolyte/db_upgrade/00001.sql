@@ -1,0 +1,6 @@
+CREATE TABLE vote (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cast_for VARCHAR(1) NOT NULL,
+    cast_date DATETIME NOT NULL
+)
+;

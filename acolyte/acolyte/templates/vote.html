@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+{% block content %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.humans }}
+        {{ form.computers }}
+    </form>
+
+{% endblock %}
