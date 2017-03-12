@@ -14,10 +14,6 @@ services:
       - ./acolyte/acolyte:/usr/src/acolyte
       - /usr/src/acolyte/static
     command: /usr/local/bin/gunicorn --reload -b :8000 acolyte.wsgi_dev:app
-    depends_on:
-      - mysql
-    links:
-      - mysql:mysql
 
   nginx:
     image: nginx
