@@ -1,0 +1,25 @@
+---
+name: Chronomancer
+spells:
+  - name: CRUMBLE
+    required: 10
+    target: Line of Sight
+    description:
+      This spell only works against man-made
+      objects
+  - name: DECAY
+    required: 12
+    target: Line of Sight
+    description:
+      The spellcaster selects and attacks a
+      target's weapon, causing it to decay.
+---
+name: Elementalist
+spells:
+  - name: CALL STORM
+    required: 12
+    target: Area Effect
+    description:
+      If this spell is successfully
+      crossbow attacks are -1 for the rest of the
+      game.
