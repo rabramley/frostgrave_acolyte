@@ -1,28 +1,46 @@
 import yaml
-from acolyte.models import Spell
+from acolyte.models import Spell, School
 from acolyte.database import db
 
-def import_spell_data(app, spell_path):
+
+def import_spells(app, spell_path):
     app.logger.info('Importing spells from {}'.format(spell_path))
     with open(spell_path, "r") as f:
         spells = yaml.load_all(f)
 
-        for s in spells:
+        for school_details in spells:
 
-            sp = Spell.query.filter(Spell.name == s['name'].title()).first()
+            school = School.query.filter(
+                School.name == school_details['name']).first()
 
-            if not sp:
-                app.logger.info('Creating Spell: {}'.format(s['name'].title()))
+            if not school:
+                app.logger.info('New School: {}'.format(
+                    school_details['name'].title()))
 
-                sp = Spell(
-                    name=s['name'].title(),
-                    school=s['school'],
-                    required=s['required'],
-                    target=s['target'],
-                    description=s['description']
+                school = School(
+                    name=school_details['name']
                 )
 
-            db.session.add(sp)
-            db.session.commit()
+                db.session.add(school)
+
+            for spell_details in school_details['spells']:
+                spell = Spell.query.filter(
+                    Spell.name == spell_details['name'].title()).first()
+
+                if not spell:
+                    app.logger.info('New Spell: {}'.format(
+                        spell_details['name'].title()))
+
+                    spell = Spell(
+                        name=spell_details['name'].title(),
+                        school=school.name,
+                        required=spell_details['required'],
+                        target=spell_details['target'],
+                        description=spell_details['description']
+                    )
+
+                db.session.add(spell)
+
+    db.session.commit()
 
     app.logger.info('Importing spells completed')

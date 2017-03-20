@@ -1,9 +1,5 @@
-CREATE TABLE spell (
+CREATE TABLE school (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(100) NOT NULL,
-    school VARCHAR(100) NOT NULL,
-    required INT NOT NULL,
-    target VARCHAR(100) NOT NULL,
-    description TEXT NOT NULL
+    name VARCHAR(100) NOT NULL
 )
 ;
