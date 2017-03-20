@@ -33,7 +33,7 @@ def import_spells(app, spell_path):
 
                     spell = Spell(
                         name=spell_details['name'].title(),
-                        school=school.name,
+                        school_id=school.id,
                         required=spell_details['required'],
                         target=spell_details['target'],
                         description=spell_details['description']
