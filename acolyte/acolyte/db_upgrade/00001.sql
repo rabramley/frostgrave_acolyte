@@ -1,6 +1,9 @@
-CREATE TABLE Loaded_Content (
+CREATE TABLE spell (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    cast_for VARCHAR(1) NOT NULL,
-    cast_date DATETIME NOT NULL
+    name VARCHAR(100) NOT NULL,
+    school VARCHAR(100) NOT NULL,
+    required INT NOT NULL,
+    target VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL
 )
 ;

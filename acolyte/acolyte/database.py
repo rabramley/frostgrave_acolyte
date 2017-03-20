@@ -8,10 +8,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-dbUpgradeDir = os.path.join(
-    os.path.abspath(os.path.dirname(__file__)),
-    'db_upgrade'
-)
 lock = Lock()
 
 
@@ -20,6 +16,11 @@ def initialise_db(app):
 
 
 def upgrade_db(app):
+    dbUpgradeDir = os.path.join(
+        os.path.abspath(os.path.dirname(__file__)),
+        'db_upgrade'
+    )
+
     app.logger.info('Upgrading DB')
 
     with lock:
@@ -59,7 +60,8 @@ def upgrade_db(app):
                         int(f.split('.')[0]),
                         datetime.datetime.now()
                     ])
-                except:
+                except Exception as err:
+                    app.logger.error(err)
                     app.logger.error(traceback.format_exc())
                     db.engine.raw_connection().cursor().execute("ROLLBACK;")
                     raise
