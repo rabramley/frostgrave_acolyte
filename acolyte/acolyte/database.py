@@ -54,7 +54,7 @@ def upgrade_db(app):
 
                     db.engine.execute("""
                         INSERT INTO db_version (version, appliedDate)
-                        VALUES (%s, %s)
+                        VALUES (?, ?)
                         """, [
                         int(f.split('.')[0]),
                         datetime.datetime.now()

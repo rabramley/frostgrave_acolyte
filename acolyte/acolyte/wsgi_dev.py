@@ -1,5 +1,5 @@
-from downloads import create_app
-from downloads.database import upgrade_db
+from acolyte import create_app
+from acolyte.database import upgrade_db
 
 app = create_app()
 

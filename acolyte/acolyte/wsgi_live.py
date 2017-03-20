@@ -1,7 +1,7 @@
-from downloads import create_app
-from downloads.database import upgrade_db
+from acolyte import create_app
+from acolyte.database import upgrade_db
 
-application = create_app()
+app = create_app()
 
-with application.app_context():
-    upgrade_db(application)
+with app.app_context():
+    upgrade_db(app)
