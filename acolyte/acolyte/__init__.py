@@ -4,6 +4,7 @@ import traceback
 from flask import Flask, render_template
 from config import BaseConfig
 from acolyte.database import initialise_db
+from acolyte.forms import *
 
 
 def create_app(config=BaseConfig):
@@ -30,5 +31,16 @@ def create_app(config=BaseConfig):
         """The home page - does nothing at present"""
 
         return render_template('index.html')
+
+    @app.route('/spellbook', methods=['GET', 'POST'])
+    def spellbook():
+        """Collect information about which forms the wizard has"""
+        form = SpellBookForm()
+
+        if form.validate_on_submit():
+
+            return redirect(url_for('index'))
+
+        return render_template('spellbook.html', form=form)
 
     return app

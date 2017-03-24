@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% import "_formHelpers.html" as formhelper %}
+{% block content %}
+
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-lg-8 col-md-7 col-sm-6">
+      <h1>Frostgrave Spellbook</h1>
+      <p class="lead">Create and print a unique spell book for your wizard</p>
+    </div>
+  </div>
+</div>
+
+<div class="well col-md-offset-1 col-md-10">
+
+  {{ formhelper.render_form_errors(form)  }}
+
+  <form method="POST" class="form-horizontal">
+    <fieldset>
+        <legend>Spell Details</legend>
+          {{ form.hidden_tag() }}
+          {{ formhelper.render_field(form.name) }}
+          {{ formhelper.render_button_bar('index') }}
+    </fieldset>
+
+  </form>
+</div>
+{% endblock %}
