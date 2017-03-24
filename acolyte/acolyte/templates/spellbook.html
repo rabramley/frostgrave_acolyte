@@ -20,6 +20,8 @@
         <legend>Spell Details</legend>
           {{ form.hidden_tag() }}
           {{ formhelper.render_field(form.name) }}
+          {{ form.spells() }}
+
           {{ formhelper.render_button_bar('index') }}
     </fieldset>
 

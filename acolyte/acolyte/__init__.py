@@ -1,7 +1,7 @@
 """Aplication to manage Frostgrave wizards
 """
 import traceback
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for
 from config import BaseConfig
 from acolyte.database import initialise_db
 from acolyte.forms import *
@@ -38,6 +38,11 @@ def create_app(config=BaseConfig):
         form = SpellBookForm()
 
         if form.validate_on_submit():
+
+            flash(form.name.data, 'success')
+
+            for s in form.spells.entries:
+                flash(s.data['name'], 'success')
 
             return redirect(url_for('index'))
 

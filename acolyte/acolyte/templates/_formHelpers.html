@@ -2,8 +2,6 @@
   <div class="form-group{% if field.errors %} has-error{%endif%} col-md-offset-1 col-md-10">
     {% if field.type == "BooleanField" %}
         {{ field.label(class="col-sm-2 control-label") }}{{ render_checkbox_field_control(field, **kwargs) }}
-    {% elif field.type == "FileField" %}
-        {{ field.label(class="col-sm-2 control-label") }}{{ render_file_field_control(field, **kwargs) }}
     {% else %}
         {{ field.label(class="col-sm-2 control-label") }}{{ render_field_control(field, **kwargs) }}
     {% endif %}
