@@ -1,10 +1,12 @@
 {% macro render_field(field) %}
-  <div class="form-group{% if field.errors %} has-error{%endif%} col-md-offset-1 col-md-10">
-    {% if field.type == "BooleanField" %}
-        {{ field.label(class="col-sm-2 control-label") }}{{ render_checkbox_field_control(field, **kwargs) }}
-    {% else %}
-        {{ field.label(class="col-sm-2 control-label") }}{{ render_field_control(field, **kwargs) }}
-    {% endif %}
+  <div class="row">
+    <div class="form-group{% if field.errors %} has-error{%endif%} col-md-offset-1 col-md-10">
+        {% if field.type == "BooleanField" %}
+            {{ field.label(class="col-sm-2 control-label") }}{{ render_checkbox_field_control(field, **kwargs) }}
+        {% else %}
+            {{ field.label(class="col-sm-2 control-label") }}{{ render_field_control(field, **kwargs) }}
+        {% endif %}
+    </div>
   </div>
 {% endmacro %}
 

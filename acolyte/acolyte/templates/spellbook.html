@@ -22,6 +22,9 @@
           {{ formhelper.render_field(form.name) }}
           {{ form.spells() }}
 
+          {% for s in schools%}
+              Hey!
+          {% endfor %}
           {{ formhelper.render_button_bar('index') }}
     </fieldset>
 

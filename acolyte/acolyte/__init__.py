@@ -5,6 +5,7 @@ from flask import Flask, render_template, flash, redirect, url_for
 from config import BaseConfig
 from acolyte.database import initialise_db
 from acolyte.forms import *
+from acolyte.models import School
 
 
 def create_app(config=BaseConfig):
@@ -36,6 +37,7 @@ def create_app(config=BaseConfig):
     def spellbook():
         """Collect information about which forms the wizard has"""
         form = SpellBookForm()
+        schools = School.query.all()
 
         if form.validate_on_submit():
 
@@ -46,6 +48,6 @@ def create_app(config=BaseConfig):
 
             return redirect(url_for('index'))
 
-        return render_template('spellbook.html', form=form)
+        return render_template('spellbook.html', form=form, schools=schools)
 
     return app
