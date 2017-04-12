@@ -20,10 +20,22 @@
         <legend>Spell Details</legend>
           {{ form.hidden_tag() }}
           {{ formhelper.render_field(form.name) }}
-          {{ form.spells() }}
 
-          {% for s in schools%}
-              Hey!
+          {% set global_spell_counter = 0 %}
+
+          {% for sch in schools%}
+              <h3>{{ sch.name }}</h3>
+
+              {% for sp in sch.spells %}
+                <div class="form-group col-md-6">
+                  <input type="hidden" id="spells-{{global_spell_counter}}-id" name="spells-{{global_spell_counter}}-id" value="{{ sp.id }}">
+                  <label class="col-sm-6 control-label" for="spells-{{global_spell_counter}}-name">{{ sp.name }}</label>
+                  <div class="col-sm-6 control-label">
+                    <input class="checkbox" id="spells-{{global_spell_counter}}-name" name="spells-{{global_spell_counter}}-name" type="checkbox" value="y">
+                  </div>
+                </div>
+                {% set global_spell_counter = global_spell_counter + 1 %}
+              {% endfor %}
           {% endfor %}
           {{ formhelper.render_button_bar('index') }}
     </fieldset>
