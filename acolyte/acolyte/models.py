@@ -30,3 +30,4 @@ class Spell(db.Model):
         self.required = kwargs.get('required')
         self.target = kwargs.get('target')
         self.description = kwargs.get('description')
+

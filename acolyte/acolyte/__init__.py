@@ -5,7 +5,7 @@ from flask import Flask, render_template, flash, redirect, url_for
 from config import BaseConfig
 from acolyte.database import initialise_db
 from acolyte.forms import *
-from acolyte.models import School
+from acolyte.models import *
 
 
 def create_app(config=BaseConfig):
@@ -36,18 +36,23 @@ def create_app(config=BaseConfig):
     @app.route('/spellbook', methods=['GET', 'POST'])
     def spellbook():
         """Collect information about which forms the wizard has"""
-        form = SpellBookForm()
-        schools = School.query.all()
+
+        spells_knowledges = [{
+            'spell_id': sp.id,
+            'school_name': sp.school.name,
+            'spell_name': sp.name,
+            'learnt': False} for i, sp in enumerate(Spell.query.all())]
+
+        form = SpellBookForm(spells_knowledges=spells_knowledges)
 
         if form.validate_on_submit():
 
-            flash(form.name.data, 'success')
-
-            for s in form.spells.entries:
-                flash(s.data['name'], 'success')
+            for s in form.spells_knowledges.entries:
+                if s.data['learnt']:
+                    flash(s.data['spell_name'], 'success')
 
             return redirect(url_for('index'))
 
-        return render_template('spellbook.html', form=form, schools=schools)
+        return render_template('spellbook.html', form=form, spellbook=spellbook)
 
     return app
