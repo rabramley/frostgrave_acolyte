@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Spell Book</title>
+    <style type="text/css" media="screen">
+    </style>
+  </head>
+  <body>
+  	<h1>Frostgrave Spell Book</h1>
+
+                  {% for sp in spells %}
+              <div class="form-group col-md-6">
+                  {{ sp.name }}
+              </div>
+            {% endfor %}
+  </body>
+</html>

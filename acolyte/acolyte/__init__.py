@@ -6,6 +6,7 @@ from config import BaseConfig
 from acolyte.database import initialise_db
 from acolyte.forms import *
 from acolyte.models import *
+from acolyte.utils import ListConverter
 
 
 def create_app(config=BaseConfig):
@@ -16,6 +17,8 @@ def create_app(config=BaseConfig):
 
     with app.app_context():
         initialise_db(app)
+
+    app.url_map.converters['list'] = ListConverter
 
     @app.errorhandler(500)
     @app.errorhandler(Exception)
@@ -47,12 +50,19 @@ def create_app(config=BaseConfig):
 
         if form.validate_on_submit():
 
-            for s in form.spells_knowledges.entries:
-                if s.data['learnt']:
-                    flash(s.data['spell_name'], 'success')
+            spell_ids = [s.data['spell_id']
+                         for s in form.spells_knowledges.entries if s.data['learnt']]
 
-            return redirect(url_for('index'))
+            return redirect(url_for('spellbook_pdf', spell_ids=spell_ids))
 
-        return render_template('spellbook.html', form=form, spellbook=spellbook)
+        return render_template('spellbook.html', form=form)
+
+    @app.route('/spellbook_pdf/<list:spell_ids>')
+    def spellbook_pdf(spell_ids):
+        """Create a PDF based on the spells the wixard has"""
+
+        spells = Spell.query.filter(Spell.id.in_(spell_ids)).all()
+
+        return render_template('spellbook_pdf.html', spells=spells)
 
     return app
