@@ -6,3 +6,4 @@ WORKDIR /usr/src
 COPY . /usr/src/
 
 RUN pip install --no-cache-dir -r requirements.txt
+COPY Alice-Regular.ttf /usr/share/fonts/

@@ -10,3 +10,4 @@ Flask-WTF
 beautifulsoup4
 pytest
 pyyaml
+Flask-WeasyPrint

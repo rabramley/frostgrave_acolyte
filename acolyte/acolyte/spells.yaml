@@ -1,5 +1,10 @@
 ---
 name: Chronomancer
+aligned:
+  - Necromancer
+  - Soothsayer
+  - Elementalist
+opposed: Enchanter
 spells:
   - name: CRUMBLE
     required: 10
@@ -102,6 +107,11 @@ spells:
       using Time Store.
 ---
 name: Elementalist
+aligned:
+  - Summoner
+  - Enchanter
+  - Chronomancer
+opposed: Illusionist
 spells:
   - name: CALL STORM
     required: 12
@@ -181,6 +191,11 @@ spells:
       on a 17+ the wall vanishes.
 ---
 name: Enchanter
+aligned:
+  - Witch
+  - Sigilist
+  - Elementalist
+opposed: Chronomancer
 spells:
   - name: ANIMATE CONSTRUCT
     required: 8
@@ -285,6 +300,11 @@ spells:
       immediately falls straight to the ground.
 ---
 name: Illusionist
+aligned:
+  - Soothsayer
+  - Sigilist
+  - Thaumaturge
+opposed: Elementalist
 spells:
   - name: BEAUTY
     required: 10
@@ -385,6 +405,11 @@ spells:
       This spell may target figures in combat.
 ---
 name: Necromancer
+aligned:
+ - Witch
+ - Chronomancer
+ - Summoner
+opposed: Thaumaturge
 spells:
   - name: BONE DART
     required: 8
@@ -491,6 +516,11 @@ spells:
       empowerment.
 ---
 name: Sigilist
+aligned:
+  - Thaumaturge
+  - Illusionist
+  - Enchanter
+opposed: Summoner
 spells:
   - name: ABSORB KNOWLEDGE
     required: 8
@@ -601,6 +631,11 @@ spells:
       spell that the spellcaster knows.
 ---
 name: Soothsayer
+aligned:
+  - Thaumaturge
+  - Chronomancer
+  - Illusionist
+opposed: Witch
 spells:
   - name: AWARENESS
     required: 8
@@ -689,6 +724,11 @@ spells:
       Eye at a time.
 ---
 name: Summoner
+aligned:
+  - Necromancer
+  - Witch
+  - Elementalist
+opposed: Sigilist
 spells:
   - name: BIND DEMON
     required: 10
@@ -815,6 +855,11 @@ spells:
       casting roll was failed.
 ---
 name: Thaumaturge
+aligned:
+  - Soothsayer
+  - Sigilist
+  - Illusionist
+opposed: Necromancer
 spells:
   - name: BANISH
     required: 10
@@ -891,6 +936,11 @@ spells:
       same target have no effect.
 ---
 name: Witch
+aligned:
+  - Enchanter
+  - Necromancer
+  - Summoner
+opposed: Soothsayer
 spells:
   - name: ANIMAL COMPANION
     required: 8

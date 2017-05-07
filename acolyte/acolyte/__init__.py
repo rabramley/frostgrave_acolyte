@@ -2,6 +2,7 @@
 """
 import traceback
 from flask import Flask, render_template, flash, redirect, url_for
+from flask_weasyprint import HTML, render_pdf
 from config import BaseConfig
 from acolyte.database import initialise_db
 from acolyte.forms import *
@@ -63,6 +64,7 @@ def create_app(config=BaseConfig):
 
         spells = Spell.query.filter(Spell.id.in_(spell_ids)).all()
 
-        return render_template('spellbook_pdf.html', spells=spells)
+        html = render_template('spellbook_pdf.html', spells=spells)
+        return render_pdf(HTML(string=html))
 
     return app

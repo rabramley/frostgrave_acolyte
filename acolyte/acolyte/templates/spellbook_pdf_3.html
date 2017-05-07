@@ -9,13 +9,13 @@
         font-family: alice;
       }
 
-      .row {
-        display: table;
-        position: relative;
+      .column {
+          display: inline-block;
+          width: 200px;
+          vertical-align: top;
       }
 
       .spell {
-        display: table-cell;
         width: 180px;
         border: 1px #DDD solid;
         padding: 20px 20px 40px 20px;
@@ -45,8 +45,8 @@
   </head>
   <body>
   	<h1>Frostgrave Spell Book</h1>
-    {% for row in spells | batch(3) %}
-      <div class="row">
+    {% for row in spells | slice(3) %}
+      <div class="column">
         {% for sp in row %}
           <div class="spell">
             <h1>{{ sp.name }}</h1>
