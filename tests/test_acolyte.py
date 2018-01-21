@@ -17,7 +17,7 @@ from config import TestConfig, TestConfigCRSF
 def app(request):
     app = acolyte.create_app(TestConfig)
     app.app_context().push()
-    acolyte.database.upgrade_db(app)
+    db.create_all()
 
     yield app
 
