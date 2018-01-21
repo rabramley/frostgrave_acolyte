@@ -5,7 +5,7 @@ from acolyte.database import db
 
 def import_spells(app, spell_path):
     app.logger.info('Importing spells from {}'.format(spell_path))
-    with open(spell_path, "r") as f:
+    with open(spell_path, "r", encoding="utf-8") as f:
         spells = yaml.load_all(f)
 
         for school_details in spells:
