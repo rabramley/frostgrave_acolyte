@@ -1,7 +1,11 @@
+"""Acolyte models"""
+
 from acolyte.database import db
 
 
 class School(db.Model):
+    """School SqlAlchemy model
+    """
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -11,6 +15,8 @@ class School(db.Model):
 
 
 class Spell(db.Model):
+    """Spell SqlAlchemy model
+    """
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -24,7 +30,21 @@ class Spell(db.Model):
         order_by=name,
         cascade="all, delete-orphan"))
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
+        """Initialise model
+        
+        Arguments:
+            **kwargs {list} -- Keyword arguments
+
+        Keyword Arguments:
+            name {str} -- Spell name
+            school_id {int} -- Spell school ID
+            required {int} -- Required dice roll
+            target {str} -- Spell target
+            description {str} -- Spell description
+        """
+
+
         self.name = kwargs.get('name')
         self.school_id = kwargs.get('school_id')
         self.required = kwargs.get('required')

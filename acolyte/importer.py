@@ -1,9 +1,18 @@
+"""Acolyte spell importer"""
+
 import yaml
 from acolyte.models import Spell, School
 from acolyte.database import db
 
 
 def import_spells(app, spell_path):
+    """Import spells from a YAML file
+    
+    Arguments:
+        app {obj} -- Acolyte application
+        spell_path {str} -- Path to spells YAML file
+    """
+
     app.logger.info('Importing spells from {}'.format(spell_path))
     with open(spell_path, "r", encoding="utf-8") as f:
         spells = yaml.load_all(f)

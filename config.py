@@ -1,6 +1,3 @@
-import os
-
-
 class BaseConfig(object):
     """Standard configuration options"""
     DEBUG = True
@@ -18,4 +15,5 @@ class TestConfig(BaseConfig):
 
 
 class TestConfigCRSF(TestConfig):
+    """Configuration for testing CRSF"""
     WTF_CSRF_ENABLED = True

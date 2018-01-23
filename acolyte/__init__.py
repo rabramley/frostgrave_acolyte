@@ -2,9 +2,9 @@
 """
 import traceback
 from flask import Flask, render_template
+from flask_migrate import Migrate
 from config import BaseConfig
 from acolyte.utils import ListConverter
-from flask_migrate import Migrate
 from acolyte.database import db
 from .ui_home import blueprint as ui_home_blueprint
 from .ui_spellbook import blueprint as ui_spellbook_blueprint
