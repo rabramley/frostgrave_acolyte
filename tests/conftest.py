@@ -59,8 +59,8 @@ def client_with_crsf():
         obj -- Flask test client
     """
 
-    ap = create_app(TestConfigCRSF)
-    ap.app_context().push()
-    result = ap.test_client()
+    crsf_app = create_app(TestConfigCRSF)
+    crsf_app.app_context().push()
+    result = crsf_app.test_client()
 
     yield result
