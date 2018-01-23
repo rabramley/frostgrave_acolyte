@@ -1,3 +1,4 @@
+"""Tool to produce spellbook PDF download"""
 
 from flask import Blueprint, render_template, redirect, url_for
 from flask_weasyprint import HTML, render_pdf
@@ -10,7 +11,15 @@ blueprint = Blueprint('ui_spellbook', __name__, template_folder='templates')
 
 @blueprint.route('/', methods=['GET', 'POST'])
 def spellbook():
-    """Collect information about which forms the wizard has"""
+    """Display and accept form for the user to select required spells
+    
+    Decorators:
+        blueprint
+    
+    Returns:
+        obj -- HTML form response or redirect to PDF creation
+    """
+
 
     spells_knowledges = [{
         'spell_id': sp.id,
@@ -23,7 +32,7 @@ def spellbook():
     if form.validate_on_submit():
 
         spell_ids = [s.data['spell_id']
-                        for s in form.spells_knowledges.entries if s.data['learnt']]
+            for s in form.spells_knowledges.entries if s.data['learnt']]
 
         return redirect(url_for('ui_spellbook.spellbook_pdf', spell_ids=spell_ids))
 
@@ -31,7 +40,18 @@ def spellbook():
 
 @blueprint.route('/pdf/<list:spell_ids>')
 def spellbook_pdf(spell_ids):
-    """Create a PDF based on the spells the wixard has"""
+    """Produce spellbook PDF from list of spell IDs
+    
+    Decorators:
+        blueprint
+    
+    Arguments:
+        spell_ids {list} -- List of Spell IDs
+    
+    Returns:
+        obj -- PDF response
+    """
+
 
     spells = Spell.query.filter(Spell.id.in_(spell_ids)).all()
 

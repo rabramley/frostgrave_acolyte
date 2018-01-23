@@ -1,4 +1,4 @@
-"""Aplication to manage Frostgrave wizards
+"""Portal for Frostgrave Utils
 """
 
 from flask import Blueprint, render_template, redirect, url_for
