@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+"""Acolyte test fixtures
 """
-    Acolyte Tests
-"""
+
 
 import pytest
 from acolyte import create_app
@@ -10,26 +10,57 @@ from config import TestConfig, TestConfigCRSF
 
 
 @pytest.yield_fixture(scope='function')
-def app(request):
-    app = create_app(TestConfig)
-    app.app_context().push()
+def app():
+    """Pytest fixture to yield a fully initialised Acolyte
+    
+    Decorators:
+        pytest
+    
+    Yields:
+        obj -- Fully initialised Acolyte application
+    """
+
+    result = create_app(TestConfig)
+    result.app_context().push()
     db.create_all()
 
-    yield app
+    yield result
 
 
 @pytest.yield_fixture(scope='function')
 def client(app):
+    """Pytest fixture to yield Flask test client for
+    initialised Acolyte application
+    
+    Decorators:
+        pytest
+    
+    Arguments:
+        app {obj} -- Initialised Acolyte application
+    
+    Yields:
+        obj -- Flask test client
+    """
+
     result = app.test_client()
 
     yield result
 
 
 @pytest.yield_fixture(scope='function')
-def client_with_crsf(app):
-    app = create_app(TestConfigCRSF)
-    app.app_context().push()
-    result = app.test_client()
+def client_with_crsf():
+    """Pytest fixture that yields Flask test client for
+    Acolyte application initialised with CRSF testing
+    
+    Decorators:
+        pytest
+    
+    Yields:
+        obj -- Flask test client
+    """
+
+    ap = create_app(TestConfigCRSF)
+    ap.app_context().push()
+    result = ap.test_client()
 
     yield result
-
