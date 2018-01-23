@@ -3,39 +3,12 @@
     Acolyte Tests
 """
 
+import os
 import pytest
-import acolyte
+from bs4 import BeautifulSoup
 import acolyte.importer
 import acolyte.database
-from acolyte.models import *
-import os
-from bs4 import BeautifulSoup
-from config import TestConfig, TestConfigCRSF
-
-
-@pytest.yield_fixture(scope='function')
-def app(request):
-    app = acolyte.create_app(TestConfig)
-    app.app_context().push()
-    db.create_all()
-
-    yield app
-
-
-@pytest.yield_fixture(scope='function')
-def client(app):
-    client = app.test_client()
-
-    yield client
-
-
-@pytest.yield_fixture(scope='function')
-def client_with_crsf(app):
-    app = acolyte.create_app(TestConfigCRSF)
-    app.app_context().push()
-    client = app.test_client()
-
-    yield client
+from acolyte.models import School, Spell
 
 
 def test_missing_route(client):
