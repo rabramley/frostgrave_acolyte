@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+"""Acolyte tests
 """
-    Acolyte Tests
-"""
+
 
 import os
 import pytest
@@ -12,6 +12,12 @@ from acolyte.models import School, Spell
 
 
 def test_missing_route(client):
+    """Test that a non-existant route returns a 404
+    
+    Arguments:
+        client {obj} -- Flask test client
+    """
+
     resp = client.get('/uihfihihf')
     assert resp.status_code == 404
 
@@ -21,6 +27,14 @@ def test_missing_route(client):
     ('/static/css/main.css')
 ])
 def test_url_exists(client, path):
+    """Test that URLs exist for the application and
+    return status 200
+    
+    Arguments:
+        client {obj} -- Flask test client
+        path {str} -- Relative URL
+    """
+
     resp = client.get(path)
 
     assert resp.status_code == 200
@@ -30,6 +44,13 @@ def test_url_exists(client, path):
     ('/')
 ])
 def test_html_boilerplate(client, path):
+    """Test that basic HTML standards are being met
+    
+    Arguments:
+        client {obj} -- Flask test client
+        path {str} -- Relative URL
+    """
+
     resp = client.get(path)
     rsoup = BeautifulSoup(resp.data, 'html.parser')
 
@@ -47,6 +68,12 @@ def test_html_boilerplate(client, path):
 
 
 def test_import_spells(app):
+    """Test importing of spells from YAML file
+    
+    Arguments:
+        app {obj} -- Acolyte application
+    """
+
     acolyte.importer.import_spells(app, os.path.join(
         os.path.abspath(os.path.dirname(__file__)),
         'test_spells.yaml'
